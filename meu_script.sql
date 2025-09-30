@@ -142,75 +142,75 @@ CREATE TABLE game_support (
 );
 
 CREATE TABLE game_developers (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     developer_id INTEGER,
     role role_enum DEFAULT 'primary',
-    PRIMARY KEY (app_id, developer_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (developer_id) REFERENCES developers(developer_id) ON DELETE CASCADE
 );
 
 CREATE TABLE game_publishers (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     publisher_id INTEGER,
     role role_publisher_enum DEFAULT 'primary',
     region VARCHAR(100),
-    PRIMARY KEY (app_id, publisher_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (publisher_id) REFERENCES publishers(publisher_id) ON DELETE CASCADE
 );
 
 CREATE TABLE game_categories (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     category_id INTEGER,
-    PRIMARY KEY (app_id, category_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
 );
-
+    
 CREATE TABLE game_genres (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     genre_id INTEGER,
     is_primary BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (app_id, genre_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (genre_id) REFERENCES genres(genre_id) ON DELETE CASCADE
 );
 
 CREATE TABLE game_tags (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     tag_id INTEGER,
     relevance_score INTEGER DEFAULT 0,
-    PRIMARY KEY (app_id, tag_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE
 );
 
 CREATE TABLE game_supported_languages (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     language_id INTEGER,
     support_level support_level_enum DEFAULT 'interface',
-    PRIMARY KEY (app_id, language_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (language_id) REFERENCES languages(language_id) ON DELETE CASCADE
 );
 
 CREATE TABLE game_audio_languages (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     language_id INTEGER,
     audio_quality audio_quality_enum DEFAULT 'full',
-    PRIMARY KEY (app_id, language_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (language_id) REFERENCES languages(language_id) ON DELETE CASCADE
 );
 
 CREATE TABLE game_platforms (
+    id SERIAL PRIMARY KEY,
     app_id INTEGER,
     platform_id INTEGER,
     minimum_requirements TEXT,
     recommended_requirements TEXT,
     release_date DATE,
-    PRIMARY KEY (app_id, platform_id),
     FOREIGN KEY (app_id) REFERENCES games(app_id) ON DELETE CASCADE,
     FOREIGN KEY (platform_id) REFERENCES platforms(platform_id) ON DELETE CASCADE
 );

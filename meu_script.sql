@@ -26,7 +26,7 @@ CREATE TABLE games (
 
 CREATE TABLE developers (
     developer_id SERIAL PRIMARY KEY,
-    developer_name VARCHAR(255) UNIQUE NOT NULL,
+    developer_name TEXT UNIQUE NOT NULL,
     founded_year INTEGER,
     country VARCHAR(100),
     website VARCHAR(255)
@@ -42,14 +42,14 @@ CREATE TABLE publishers (
 
 CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR(100) UNIQUE NOT NULL,
+    category_name TEXT UNIQUE NOT NULL,
     category_type category_type_enum DEFAULT 'gameplay',
     description TEXT
 );
 
 CREATE TABLE genres (
     genre_id SERIAL PRIMARY KEY,
-    genre_name VARCHAR(100) UNIQUE NOT NULL,
+    genre_name VARCHAR(255) UNIQUE NOT NULL,
     parent_genre_id INTEGER,
     description TEXT,
     FOREIGN KEY (parent_genre_id) REFERENCES genres(genre_id)
@@ -57,7 +57,7 @@ CREATE TABLE genres (
 
 CREATE TABLE tags (
     tag_id SERIAL PRIMARY KEY,
-    tag_name VARCHAR(100) UNIQUE NOT NULL,
+    tag_name TEXT UNIQUE NOT NULL,
     tag_category tag_category_enum DEFAULT 'gameplay',
     popularity_score INTEGER DEFAULT 0
 );
@@ -89,7 +89,7 @@ CREATE TABLE screenshots (
 CREATE TABLE movies (
     movie_id SERIAL PRIMARY KEY,
     app_id INTEGER NOT NULL,
-    movie_url VARCHAR(500) NOT NULL,
+    movie_url TEXT,
     movie_type movie_type_enum DEFAULT 'trailer',
     duration INTEGER,
     resolution VARCHAR(20),
@@ -134,7 +134,7 @@ CREATE TABLE game_support (
     support_id SERIAL PRIMARY KEY,
     app_id INTEGER UNIQUE NOT NULL,
     website VARCHAR(255),
-    support_url VARCHAR(255),
+    support_url TEXT,
     support_email VARCHAR(255),
     community_forum VARCHAR(255),
     documentation_url VARCHAR(255),
